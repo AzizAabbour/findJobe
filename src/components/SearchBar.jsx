@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiSearch, FiX } from 'react-icons/fi';
+import { MagnifyingGlassIcon, Cross2Icon } from '@radix-ui/react-icons';
 
 export const SearchBar = ({
   value,
@@ -10,8 +10,9 @@ export const SearchBar = ({
 }) => {
   return (
     <div style={{ position: 'relative', width: '100%', marginBottom: '1rem' }}>
-      <FiSearch
-        size={18}
+      <MagnifyingGlassIcon
+        width={18}
+        height={18}
         style={{
           position: 'absolute',
           left: '1.1rem',
@@ -30,11 +31,11 @@ export const SearchBar = ({
           width: '100%',
           paddingLeft: '2.85rem',
           paddingRight: value ? '5.5rem' : '2.5rem',
-          height: '46px',
+          height: '44px',
           background: 'var(--bg-surface)',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-md)',
-          fontSize: '0.95rem'
+          fontSize: '0.92rem'
         }}
       />
       {value && (
@@ -47,11 +48,13 @@ export const SearchBar = ({
             top: '50%',
             transform: 'translateY(-50%)',
             color: 'var(--text-muted)',
-            padding: '4px'
+            padding: '4px',
+            display: 'flex',
+            alignItems: 'center'
           }}
           aria-label="Effacer la recherche"
         >
-          <FiX size={16} />
+          <Cross2Icon width={15} height={15} />
         </button>
       )}
       {count !== undefined && (
@@ -61,11 +64,11 @@ export const SearchBar = ({
             right: '1rem',
             top: '50%',
             transform: 'translateY(-50%)',
-            fontSize: '0.75rem',
+            fontSize: '0.74rem',
             color: 'var(--color-gold-light)',
             fontWeight: 700,
             background: 'var(--color-gold-subtle)',
-            padding: '0.2rem 0.5rem',
+            padding: '0.15rem 0.5rem',
             borderRadius: 'var(--radius-full)'
           }}
         >

@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate, Link } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import {
-  FiSend,
-  FiFileText,
-  FiEdit3,
-  FiEye,
-  FiSave,
-  FiCheckCircle,
-  FiAlertCircle,
-  FiRefreshCw,
-  FiGlobe,
-  FiGithub,
-  FiLinkedin,
-  FiMail,
-  FiCheck
-} from 'react-icons/fi';
+  PaperPlaneIcon,
+  FileTextIcon,
+  Pencil1Icon,
+  EyeOpenIcon,
+  BookmarkIcon,
+  CheckCircledIcon,
+  ExclamationTriangleIcon,
+  ReloadIcon,
+  GlobeIcon,
+  GitHubLogoIcon,
+  LinkedInLogoIcon
+} from '@radix-ui/react-icons';
 import { profileService } from '../services/profileService';
 import { companyService } from '../services/companyService';
 import { jobService } from '../services/jobService';
@@ -46,13 +44,12 @@ export const ApplicationAssistant = () => {
   const [message, setMessage] = useState('');
   const [recipientEmail, setRecipientEmail] = useState('');
   const [subject, setSubject] = useState('');
-  const [activeTab, setActiveTab] = useState('edit'); // 'edit' or 'preview'
+  const [activeTab, setActiveTab] = useState('edit');
 
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [duplicateWarning, setDuplicateWarning] = useState(false);
 
-  // Initialize selected job/company and follow-up application
   useEffect(() => {
     if (followUpIdParam) {
       const app = applicationService.getById(followUpIdParam);
@@ -105,7 +102,6 @@ export const ApplicationAssistant = () => {
         setMessage(generated);
       }
     } else if (jobs.length > 0) {
-      // Default to first job
       const firstJob = jobs[0];
       setSelectedJobId(String(firstJob.id));
       setSelectedCompanyId(String(firstJob.companyId));
@@ -122,7 +118,6 @@ export const ApplicationAssistant = () => {
     }
   }, [jobIdParam, companyIdParam, followUpIdParam]);
 
-  // Check duplicate applications whenever target changes
   useEffect(() => {
     if (selectedJobId || selectedCompanyId) {
       const isDup = applicationService.isDuplicate(selectedJobId, selectedCompanyId);
@@ -155,7 +150,6 @@ export const ApplicationAssistant = () => {
     const comp = companyService.getById(newCompanyId);
     if (comp) {
       setRecipientEmail(comp.email || '');
-      // Filter jobs for this company
       const compJobs = jobService.getByCompanyId(newCompanyId);
       if (compJobs.length > 0) {
         handleJobSelectChange(String(compJobs[0].id));
@@ -225,7 +219,7 @@ export const ApplicationAssistant = () => {
     const jobTitle = currentJob ? currentJob.title : 'Développeur Web Full Stack';
 
     try {
-      const result = await emailService.sendApplicationEmail({
+      await emailService.sendApplicationEmail({
         applicantName: profile.fullName,
         applicantEmail: profile.email,
         companyName,
@@ -260,7 +254,6 @@ export const ApplicationAssistant = () => {
       setIsConfirmModalOpen(false);
       setIsSending(false);
 
-      // Trigger celebrate confetti
       try {
         confetti({
           particleCount: 80,
@@ -269,7 +262,7 @@ export const ApplicationAssistant = () => {
           colors: ['#9B7842', '#C49F63', '#FFFFFF', '#10B981']
         });
       } catch (err) {
-        // ignore confetti errors
+        // ignore confetti
       }
 
       showSuccess(`Candidature transmise avec succès à ${companyName} !`);
@@ -287,11 +280,11 @@ export const ApplicationAssistant = () => {
   const selectedJobObj = jobs.find(j => String(j.id) === String(selectedJobId));
 
   return (
-    <div className="page-container" style={{ maxWidth: '1050px' }}>
+    <div className="page-container" style={{ maxWidth: '1000px' }}>
       {/* Header */}
       <div className="page-header">
         <div>
-          <span className="badge badge-gold" style={{ marginBottom: '0.4rem' }}>
+          <span className="badge badge-gold" style={{ marginBottom: '0.35rem' }}>
             {isFollowUpMode ? 'Relance de Candidature' : 'Générateur de Candidature Personnalisée'}
           </span>
           <h1 className="page-title">
@@ -302,12 +295,12 @@ export const ApplicationAssistant = () => {
           </p>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', gap: '0.65rem' }}>
           <button type="button" onClick={handleRegenerate} className="btn btn-secondary btn-sm">
-            <FiRefreshCw /> Réinitialiser le texte
+            <ReloadIcon width={12} height={12} /> Réinitialiser le texte
           </button>
           <button type="button" onClick={handleSaveDraft} className="btn btn-gold-outline btn-sm">
-            <FiSave /> Enregistrer en Brouillon
+            <BookmarkIcon width={12} height={12} /> Enregistrer en Brouillon
           </button>
         </div>
       </div>
@@ -319,30 +312,29 @@ export const ApplicationAssistant = () => {
             background: 'rgba(245, 158, 11, 0.12)',
             border: '1px solid rgba(245, 158, 11, 0.35)',
             borderRadius: 'var(--radius-sm)',
-            padding: '1rem 1.25rem',
-            marginBottom: '1.5rem',
+            padding: '0.85rem 1.15rem',
+            marginBottom: '1.25rem',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.75rem'
+            gap: '0.65rem'
           }}
         >
-          <FiAlertCircle size={22} style={{ color: '#FBBF24', flexShrink: 0 }} />
-          <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-            <strong style={{ color: '#FFF' }}>Attention :</strong> Vous avez déjà enregistré ou envoyé une candidature pour cette opportunité. Évitez les doublons pour préserver votre réputation professionnelle.
+          <ExclamationTriangleIcon width={18} height={18} style={{ color: '#FBBF24', flexShrink: 0 }} />
+          <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)' }}>
+            <strong style={{ color: '#FFF' }}>Attention :</strong> Vous avez déjà enregistré ou envoyé une candidature pour cette opportunité. Évitez les doublons.
           </div>
         </div>
       )}
 
       {/* Target Company & Job Selection Card */}
-      <div className="glass-card" style={{ padding: '1.5rem', marginBottom: '1.75rem' }}>
-        <h3 style={{ fontSize: '1.1rem', color: '#FFF', marginBottom: '1rem' }}>
+      <div className="glass-card" style={{ padding: '1.5rem', marginBottom: '1.5rem' }}>
+        <h3 style={{ fontSize: '1.05rem', color: '#FFF', marginBottom: '0.85rem' }}>
           1. Sélection de l'Entreprise et du Poste Cible
         </h3>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
-          {/* Company Selector */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
+            <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.3rem' }}>
               Entreprise / Startup :
             </label>
             <select
@@ -359,9 +351,8 @@ export const ApplicationAssistant = () => {
             </select>
           </div>
 
-          {/* Job Selector */}
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
+            <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.3rem' }}>
               Poste / Offre visée :
             </label>
             <select
@@ -379,10 +370,9 @@ export const ApplicationAssistant = () => {
           </div>
         </div>
 
-        {/* Email & Subject Details */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginTop: '1.25rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
+            <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.3rem' }}>
               Email Recrutement RH (Officiel) :
             </label>
             <input
@@ -395,7 +385,7 @@ export const ApplicationAssistant = () => {
           </div>
 
           <div>
-            <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
+            <label style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.3rem' }}>
               Objet de l'Email :
             </label>
             <input
@@ -410,13 +400,12 @@ export const ApplicationAssistant = () => {
       </div>
 
       {/* Message Editor & Preview Card */}
-      <div className="glass-card" style={{ padding: '1.75rem', marginBottom: '2rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <h3 style={{ fontSize: '1.1rem', color: '#FFF' }}>
+      <div className="glass-card" style={{ padding: '1.5rem', marginBottom: '1.75rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.65rem' }}>
+          <h3 style={{ fontSize: '1.05rem', color: '#FFF' }}>
             2. Personnalisation du Message en Français
           </h3>
 
-          {/* Toggle Tabs */}
           <div style={{ display: 'flex', background: 'var(--bg-elevated)', borderRadius: 'var(--radius-sm)', padding: '2px', border: '1px solid var(--border-subtle)' }}>
             <button
               type="button"
@@ -425,10 +414,12 @@ export const ApplicationAssistant = () => {
               style={{
                 background: activeTab === 'edit' ? 'var(--color-gold)' : 'transparent',
                 color: activeTab === 'edit' ? '#070707' : 'var(--text-secondary)',
-                fontWeight: 600
+                fontWeight: 600,
+                padding: '0.2rem 0.55rem',
+                fontSize: '0.74rem'
               }}
             >
-              <FiEdit3 size={13} /> Éditeur
+              <Pencil1Icon width={12} height={12} /> Éditeur
             </button>
             <button
               type="button"
@@ -437,10 +428,12 @@ export const ApplicationAssistant = () => {
               style={{
                 background: activeTab === 'preview' ? 'var(--color-gold)' : 'transparent',
                 color: activeTab === 'preview' ? '#070707' : 'var(--text-secondary)',
-                fontWeight: 600
+                fontWeight: 600,
+                padding: '0.2rem 0.55rem',
+                fontSize: '0.74rem'
               }}
             >
-              <FiEye size={13} /> Aperçu Final
+              <EyeOpenIcon width={12} height={12} /> Aperçu Final
             </button>
           </div>
         </div>
@@ -448,35 +441,35 @@ export const ApplicationAssistant = () => {
         {activeTab === 'edit' ? (
           <div>
             <textarea
-              rows={14}
+              rows={13}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               style={{
                 width: '100%',
                 fontFamily: 'var(--font-sans)',
-                fontSize: '0.92rem',
+                fontSize: '0.88rem',
                 lineHeight: 1.6,
-                padding: '1rem',
+                padding: '0.85rem',
                 resize: 'vertical'
               }}
             />
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.5rem', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-              <span>Conseil : Vous pouvez éditer librement ce texte pour ajouter des détails spécifiques à vos réalisations.</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.4rem', fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+              <span>Conseil : Vous pouvez éditer librement ce texte avant envoi.</span>
               <span>{message.length} caractères</span>
             </div>
           </div>
         ) : (
           <div
             style={{
-              background: '#0F0F0F',
+              background: '#0D0D0D',
               border: '1px solid var(--border-subtle)',
               borderRadius: 'var(--radius-sm)',
-              padding: '1.5rem',
-              fontSize: '0.92rem',
-              lineHeight: 1.7,
+              padding: '1.25rem',
+              fontSize: '0.88rem',
+              lineHeight: 1.65,
               color: 'var(--text-primary)',
               whiteSpace: 'pre-wrap',
-              minHeight: '280px'
+              minHeight: '260px'
             }}
           >
             {message}
@@ -485,8 +478,8 @@ export const ApplicationAssistant = () => {
 
         {/* Attached CV & Links Confirmation Strip */}
         <div style={{
-          marginTop: '1.5rem',
-          padding: '1rem',
+          marginTop: '1.25rem',
+          padding: '0.85rem',
           borderRadius: 'var(--radius-sm)',
           background: 'rgba(255, 255, 255, 0.02)',
           border: '1px solid var(--border-subtle)',
@@ -494,31 +487,31 @@ export const ApplicationAssistant = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          gap: '0.75rem',
-          fontSize: '0.82rem'
+          gap: '0.65rem',
+          fontSize: '0.8rem'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <FiFileText style={{ color: '#34D399' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <FileTextIcon width={14} height={14} style={{ color: '#34D399' }} />
             <span style={{ color: 'var(--text-muted)' }}>CV joint :</span>
             <span style={{ fontWeight: 600, color: '#FFF' }}>
               {cv ? cv.fileName : 'CV_Abdelaziz_Aabbour.pdf'}
             </span>
           </div>
 
-          <div style={{ display: 'flex', gap: '0.75rem', color: 'var(--text-secondary)' }}>
+          <div style={{ display: 'flex', gap: '0.65rem', color: 'var(--text-secondary)' }}>
             {profile.portfolio && (
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                <FiGlobe size={12} /> Portfolio
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
+                <GlobeIcon width={11} height={11} /> Portfolio
               </span>
             )}
             {profile.github && (
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                <FiGithub size={12} /> GitHub
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
+                <GitHubLogoIcon width={11} height={11} /> GitHub
               </span>
             )}
             {profile.linkedin && (
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                <FiLinkedin size={12} /> LinkedIn
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
+                <LinkedInLogoIcon width={11} height={11} /> LinkedIn
               </span>
             )}
           </div>
@@ -526,13 +519,13 @@ export const ApplicationAssistant = () => {
       </div>
 
       {/* Action Bar */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem', alignItems: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.85rem', alignItems: 'center' }}>
         <button
           type="button"
           onClick={handleSaveDraft}
           className="btn btn-secondary btn-lg"
         >
-          <FiSave /> Sauvegarder comme Brouillon
+          <BookmarkIcon width={14} height={14} /> Sauvegarder comme Brouillon
         </button>
 
         <button
@@ -546,7 +539,7 @@ export const ApplicationAssistant = () => {
           }}
           className="btn btn-primary btn-lg"
         >
-          <FiSend /> Préparer & Transmettre la Candidature
+          <PaperPlaneIcon width={14} height={14} /> Préparer & Transmettre la Candidature
         </button>
       </div>
 

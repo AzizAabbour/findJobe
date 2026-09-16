@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiMapPin, FiBriefcase, FiClock, FiBookmark, FiSend, FiExternalLink, FiDollarSign } from 'react-icons/fi';
+import {
+  BackpackIcon,
+  ClockIcon,
+  BookmarkIcon,
+  BookmarkFilledIcon,
+  PaperPlaneIcon
+} from '@radix-ui/react-icons';
 import { SkillBadge } from './SkillBadge';
 import { VerificationBadge } from './VerificationBadge';
 import { getRelativeTime } from '../utils/formatDate';
@@ -21,8 +27,6 @@ export const JobCard = ({ job, isSaved, onToggleSave, onQuickApply }) => {
     salaryRange,
     technologies = [],
     postedDate,
-    applicationMethod,
-    contactEmail,
     verifiedAt,
     sourceUrl,
     isDemo,
@@ -39,22 +43,22 @@ export const JobCard = ({ job, isSaved, onToggleSave, onQuickApply }) => {
   };
 
   return (
-    <div className="glass-card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div className="glass-card" style={{ padding: '1.35rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Header: Company + Title + Save */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '0.85rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <div
             style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '10px',
+              width: '40px',
+              height: '40px',
+              borderRadius: '9px',
               background: `linear-gradient(135deg, ${companyLogoColor} 0%, #151515 150%)`,
               border: `1px solid ${companyLogoColor}44`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 800,
-              fontSize: '0.95rem',
+              fontSize: '0.9rem',
               color: '#FFFFFF',
               flexShrink: 0
             }}
@@ -64,18 +68,18 @@ export const JobCard = ({ job, isSaved, onToggleSave, onQuickApply }) => {
           <div>
             <Link
               to={`/companies/${companyId}`}
-              style={{ fontSize: '0.82rem', color: 'var(--color-gold-light)', fontWeight: 600, display: 'block' }}
+              style={{ fontSize: '0.8rem', color: 'var(--color-gold-light)', fontWeight: 600, display: 'block' }}
             >
               {companyName}
             </Link>
             <Link
               to={`/jobs/${id}`}
               style={{
-                fontSize: '1.05rem',
+                fontSize: '1rem',
                 fontWeight: 700,
                 color: '#FFFFFF',
                 lineHeight: 1.25,
-                marginTop: '0.15rem',
+                marginTop: '0.1rem',
                 display: 'block'
               }}
             >
@@ -89,24 +93,24 @@ export const JobCard = ({ job, isSaved, onToggleSave, onQuickApply }) => {
             onClick={() => onToggleSave(id)}
             className="btn btn-secondary btn-icon"
             style={{
-              width: '32px',
-              height: '32px',
+              width: '30px',
+              height: '30px',
               color: isSaved ? 'var(--color-gold-light)' : 'var(--text-muted)'
             }}
             title={isSaved ? "Retirer de mes offres enregistrées" : "Enregistrer cette offre"}
           >
-            <FiBookmark fill={isSaved ? 'currentColor' : 'none'} size={15} />
+            {isSaved ? <BookmarkFilledIcon width={14} height={14} /> : <BookmarkIcon width={14} height={14} />}
           </button>
         )}
       </div>
 
       {/* Meta tags: City, Location type, Job type, Salary */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.9rem', fontSize: '0.8rem' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.85rem', fontSize: '0.76rem' }}>
         <span className="badge badge-gray">
-          <FiMapPin size={11} /> {city} ({locationType || 'Sur site'})
+          {city} ({locationType || 'Sur site'})
         </span>
         <span className="badge badge-gold">
-          <FiBriefcase size={11} /> {jobType}
+          <BackpackIcon width={10} height={10} /> {jobType}
         </span>
         {experienceLevel && (
           <span className="badge badge-gray">
@@ -115,7 +119,7 @@ export const JobCard = ({ job, isSaved, onToggleSave, onQuickApply }) => {
         )}
         {salaryRange && (
           <span className="badge badge-gray" style={{ color: '#34D399' }}>
-            <FiDollarSign size={11} /> {salaryRange}
+            {salaryRange}
           </span>
         )}
       </div>
@@ -123,10 +127,10 @@ export const JobCard = ({ job, isSaved, onToggleSave, onQuickApply }) => {
       {/* Brief description snippet */}
       {description && (
         <p style={{
-          fontSize: '0.85rem',
+          fontSize: '0.82rem',
           color: 'var(--text-secondary)',
           lineHeight: 1.45,
-          marginBottom: '1rem',
+          marginBottom: '0.85rem',
           display: '-webkit-box',
           WebkitLineClamp: 2,
           WebkitBoxOrient: 'vertical',
@@ -138,12 +142,12 @@ export const JobCard = ({ job, isSaved, onToggleSave, onQuickApply }) => {
       )}
 
       {/* Required Tech tags */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1.1rem' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1rem' }}>
         {technologies.slice(0, 5).map((tech) => (
           <SkillBadge key={tech} skill={tech} size="sm" />
         ))}
         {technologies.length > 5 && (
-          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', alignSelf: 'center', marginLeft: '0.2rem' }}>
+          <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', alignSelf: 'center', marginLeft: '0.2rem' }}>
             +{technologies.length - 5}
           </span>
         )}
@@ -151,7 +155,7 @@ export const JobCard = ({ job, isSaved, onToggleSave, onQuickApply }) => {
 
       {/* Footer: Verification, Posted Date & Actions */}
       <div style={{
-        paddingTop: '0.85rem',
+        paddingTop: '0.75rem',
         borderTop: '1px solid var(--border-subtle)',
         display: 'flex',
         alignItems: 'center',
@@ -160,19 +164,19 @@ export const JobCard = ({ job, isSaved, onToggleSave, onQuickApply }) => {
         gap: '0.5rem',
         marginTop: 'auto'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
           <VerificationBadge verifiedAt={verifiedAt} sourceUrl={sourceUrl} isDemo={isDemo} />
-          <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-            <FiClock size={11} /> {getRelativeTime(postedDate)}
+          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
+            <ClockIcon width={11} height={11} /> {getRelativeTime(postedDate)}
           </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Link to={`/jobs/${id}`} className="btn btn-secondary btn-sm">
-            Voir l'offre
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <Link to={`/jobs/${id}`} className="btn btn-secondary btn-sm" style={{ padding: '0.3rem 0.65rem', fontSize: '0.78rem' }}>
+            Détails
           </Link>
-          <button onClick={handleApplyClick} className="btn btn-primary btn-sm">
-            <FiSend size={13} /> Postuler
+          <button onClick={handleApplyClick} className="btn btn-primary btn-sm" style={{ padding: '0.3rem 0.75rem', fontSize: '0.78rem' }}>
+            <PaperPlaneIcon width={11} height={11} /> Postuler
           </button>
         </div>
       </div>

@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiCheckCircle, FiAlertCircle, FiInfo, FiX } from 'react-icons/fi';
+import {
+  CheckCircledIcon,
+  ExclamationTriangleIcon,
+  InfoCircledIcon,
+  Cross2Icon
+} from '@radix-ui/react-icons';
 
 const ToastContext = createContext(null);
 
@@ -34,19 +39,19 @@ export const ToastProvider = ({ children }) => {
         <AnimatePresence>
           {toasts.map((toast) => {
             const icons = {
-              success: <FiCheckCircle style={{ color: '#10B981', fontSize: '1.2rem', flexShrink: 0 }} />,
-              error: <FiAlertCircle style={{ color: '#EF4444', fontSize: '1.2rem', flexShrink: 0 }} />,
-              warning: <FiAlertCircle style={{ color: '#F59E0B', fontSize: '1.2rem', flexShrink: 0 }} />,
-              info: <FiInfo style={{ color: 'var(--color-gold-light)', fontSize: '1.2rem', flexShrink: 0 }} />
+              success: <CheckCircledIcon width={18} height={18} style={{ color: '#10B981', flexShrink: 0 }} />,
+              error: <ExclamationTriangleIcon width={18} height={18} style={{ color: '#EF4444', flexShrink: 0 }} />,
+              warning: <ExclamationTriangleIcon width={18} height={18} style={{ color: '#F59E0B', flexShrink: 0 }} />,
+              info: <InfoCircledIcon width={18} height={18} style={{ color: 'var(--color-gold-light)', flexShrink: 0 }} />
             };
 
             return (
               <motion.div
                 key={toast.id}
                 className={`toast-item ${toast.type}`}
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                initial={{ opacity: 0, y: 15, scale: 0.96 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                exit={{ opacity: 0, scale: 0.92, transition: { duration: 0.18 } }}
                 layout
               >
                 {icons[toast.type] || icons.info}
@@ -56,7 +61,7 @@ export const ToastProvider = ({ children }) => {
                   style={{ color: 'var(--text-muted)', display: 'flex', alignItems: 'center', padding: '2px' }}
                   aria-label="Fermer"
                 >
-                  <FiX />
+                  <Cross2Icon width={14} height={14} />
                 </button>
               </motion.div>
             );

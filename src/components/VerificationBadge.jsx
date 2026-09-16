@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiCheckCircle, FiAlertTriangle } from 'react-icons/fi';
+import { CheckCircledIcon, ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { formatDate } from '../utils/formatDate';
 
 export const VerificationBadge = ({ verifiedAt, sourceUrl, isDemo }) => {
@@ -8,7 +8,7 @@ export const VerificationBadge = ({ verifiedAt, sourceUrl, isDemo }) => {
     const date = new Date(verifiedAt);
     const now = new Date();
     const diffDays = (now - date) / (1000 * 60 * 60 * 24);
-    return diffDays <= 60; // verified in last 60 days
+    return diffDays <= 60;
   };
 
   const isVerified = Boolean(verifiedAt && isRecent());
@@ -20,7 +20,7 @@ export const VerificationBadge = ({ verifiedAt, sourceUrl, isDemo }) => {
           className="badge badge-verified"
           title={`Source vérifiée le ${formatDate(verifiedAt)}`}
         >
-          <FiCheckCircle size={11} />
+          <CheckCircledIcon width={12} height={12} />
           <span>Vérifié {formatDate(verifiedAt)}</span>
         </span>
       ) : (
@@ -28,7 +28,7 @@ export const VerificationBadge = ({ verifiedAt, sourceUrl, isDemo }) => {
           className="badge badge-warning"
           title="Cette offre nécessite une nouvelle vérification"
         >
-          <FiAlertTriangle size={11} />
+          <ExclamationTriangleIcon width={12} height={12} />
           <span>À vérifier</span>
         </span>
       )}
@@ -40,7 +40,7 @@ export const VerificationBadge = ({ verifiedAt, sourceUrl, isDemo }) => {
             background: 'rgba(155, 120, 66, 0.15)',
             color: 'var(--color-gold-light)',
             border: '1px dashed var(--color-gold-border)',
-            fontSize: '0.68rem'
+            fontSize: '0.66rem'
           }}
           title="Donnée de démonstration vérifiée pour l'écosystème marocain"
         >

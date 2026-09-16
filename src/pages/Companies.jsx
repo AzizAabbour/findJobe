@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { FiLayers, FiPlus, FiBriefcase } from 'react-icons/fi';
+import { LayersIcon, PlusIcon } from '@radix-ui/react-icons';
 import { Link } from 'react-router-dom';
 import { companyService } from '../services/companyService';
 import { CompanyCard } from '../components/CompanyCard';
@@ -17,7 +17,6 @@ export const Companies = () => {
 
   const filteredCompanies = useMemo(() => {
     return companies.filter((company) => {
-      // Search query filter (name, city, category, tech, description)
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matchesName = company.name.toLowerCase().includes(q);
@@ -30,17 +29,14 @@ export const Companies = () => {
         }
       }
 
-      // City filter
       if (selectedCity && company.city.toLowerCase() !== selectedCity.toLowerCase()) {
         return false;
       }
 
-      // Category filter
       if (selectedCategory && selectedCategory !== 'Toutes les catégories' && company.category !== selectedCategory) {
         return false;
       }
 
-      // Tech filter
       if (selectedTech) {
         const hasTech = (company.technologies || []).some(
           t => t.toLowerCase() === selectedTech.toLowerCase()
@@ -69,7 +65,7 @@ export const Companies = () => {
       {/* Header */}
       <div className="page-header">
         <div>
-          <span className="badge badge-gold" style={{ marginBottom: '0.4rem' }}>
+          <span className="badge badge-gold" style={{ marginBottom: '0.35rem' }}>
             Annuaire Tech Maroc
           </span>
           <h1 className="page-title">Startups & Entreprises Technologiques</h1>
@@ -79,7 +75,7 @@ export const Companies = () => {
         </div>
 
         <Link to="/admin" className="btn btn-secondary btn-sm">
-          <FiPlus /> Proposer une entreprise
+          <PlusIcon width={13} height={13} /> Proposer une entreprise
         </Link>
       </div>
 
@@ -106,7 +102,7 @@ export const Companies = () => {
       {/* Grid of Company Cards */}
       {filteredCompanies.length === 0 ? (
         <EmptyState
-          icon={FiLayers}
+          icon={LayersIcon}
           title="Aucune entreprise trouvée"
           description="Aucune startup ou agence ne correspond à vos critères de recherche actuels."
           actionText="Réinitialiser les filtres"

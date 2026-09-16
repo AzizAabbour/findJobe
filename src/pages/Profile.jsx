@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { FiUser, FiMail, FiPhone, FiMapPin, FiBriefcase, FiAward, FiGlobe, FiGithub, FiLinkedin, FiPlus, FiSave, FiCheckCircle } from 'react-icons/fi';
+import {
+  PersonIcon,
+  BackpackIcon,
+  GlobeIcon,
+  GitHubLogoIcon,
+  LinkedInLogoIcon,
+  PlusIcon,
+  CheckCircledIcon
+} from '@radix-ui/react-icons';
 import { profileService } from '../services/profileService';
 import { SkillBadge } from '../components/SkillBadge';
 import { useToast } from '../context/ToastContext';
@@ -45,10 +53,10 @@ export const Profile = () => {
   };
 
   return (
-    <div className="page-container" style={{ maxWidth: '1000px' }}>
+    <div className="page-container" style={{ maxWidth: '960px' }}>
       <div className="page-header">
         <div>
-          <span className="badge badge-gold" style={{ marginBottom: '0.4rem' }}>
+          <span className="badge badge-gold" style={{ marginBottom: '0.35rem' }}>
             Mon Dossier Candidat
           </span>
           <h1 className="page-title">Profil Développeur</h1>
@@ -58,20 +66,20 @@ export const Profile = () => {
         </div>
 
         <button type="button" onClick={handleSubmit} className="btn btn-primary">
-          <FiSave /> Enregistrer mon profil
+          <CheckCircledIcon width={15} height={15} /> Enregistrer mon profil
         </button>
       </div>
 
       <form onSubmit={handleSubmit}>
         {/* Personal & Contact Information */}
-        <div className="glass-card" style={{ padding: '2rem', marginBottom: '1.75rem' }}>
-          <h3 style={{ fontSize: '1.2rem', color: '#FFF', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <FiUser style={{ color: 'var(--color-gold-light)' }} /> Identité & Coordonnées
+        <div className="glass-card" style={{ padding: '1.75rem', marginBottom: '1.5rem' }}>
+          <h3 style={{ fontSize: '1.15rem', color: '#FFF', marginBottom: '1.15rem', display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+            <PersonIcon style={{ color: 'var(--color-gold-light)' }} width={17} height={17} /> Identité & Coordonnées
           </h3>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Nom Complet *
               </label>
               <input
@@ -86,7 +94,7 @@ export const Profile = () => {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Titre Professionnel *
               </label>
               <input
@@ -101,7 +109,7 @@ export const Profile = () => {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Email Professionnel *
               </label>
               <input
@@ -116,7 +124,7 @@ export const Profile = () => {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Numéro de Téléphone *
               </label>
               <input
@@ -131,7 +139,7 @@ export const Profile = () => {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Ville de Résidence *
               </label>
               <input
@@ -146,7 +154,7 @@ export const Profile = () => {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Pays
               </label>
               <input
@@ -162,14 +170,14 @@ export const Profile = () => {
         </div>
 
         {/* Education & Experience */}
-        <div className="glass-card" style={{ padding: '2rem', marginBottom: '1.75rem' }}>
-          <h3 style={{ fontSize: '1.2rem', color: '#FFF', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <FiAward style={{ color: 'var(--color-gold-light)' }} /> Formation & Expérience
+        <div className="glass-card" style={{ padding: '1.75rem', marginBottom: '1.5rem' }}>
+          <h3 style={{ fontSize: '1.15rem', color: '#FFF', marginBottom: '1.15rem', display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+            <BackpackIcon style={{ color: 'var(--color-gold-light)' }} width={17} height={17} /> Formation & Expérience
           </h3>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem', marginBottom: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem', marginBottom: '1rem' }}>
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Établissement de Formation *
               </label>
               <input
@@ -183,7 +191,7 @@ export const Profile = () => {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Intitulé du Diplôme (Bac+2) *
               </label>
               <input
@@ -197,7 +205,7 @@ export const Profile = () => {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Années d'Expérience
               </label>
               <input
@@ -212,7 +220,7 @@ export const Profile = () => {
           </div>
 
           <div>
-            <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+            <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
               Bio / Résumé Professionnel
             </label>
             <textarea
@@ -227,14 +235,14 @@ export const Profile = () => {
         </div>
 
         {/* Links & Portfolios */}
-        <div className="glass-card" style={{ padding: '2rem', marginBottom: '1.75rem' }}>
-          <h3 style={{ fontSize: '1.2rem', color: '#FFF', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <FiGlobe style={{ color: 'var(--color-gold-light)' }} /> Liens & Portfolios
+        <div className="glass-card" style={{ padding: '1.75rem', marginBottom: '1.5rem' }}>
+          <h3 style={{ fontSize: '1.15rem', color: '#FFF', marginBottom: '1.15rem', display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+            <GlobeIcon style={{ color: 'var(--color-gold-light)' }} width={17} height={17} /> Liens & Portfolios
           </h3>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Lien Portfolio Personnel
               </label>
               <input
@@ -248,7 +256,7 @@ export const Profile = () => {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Profil GitHub
               </label>
               <input
@@ -262,7 +270,7 @@ export const Profile = () => {
             </div>
 
             <div>
-              <label style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
+              <label style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                 Profil LinkedIn
               </label>
               <input
@@ -278,16 +286,15 @@ export const Profile = () => {
         </div>
 
         {/* Dynamic Skills Management */}
-        <div className="glass-card" style={{ padding: '2rem', marginBottom: '2rem' }}>
-          <h3 style={{ fontSize: '1.2rem', color: '#FFF', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <FiBriefcase style={{ color: 'var(--color-gold-light)' }} /> Compétences & Technologies Maîtrisées
+        <div className="glass-card" style={{ padding: '1.75rem', marginBottom: '1.75rem' }}>
+          <h3 style={{ fontSize: '1.15rem', color: '#FFF', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+            <BackpackIcon style={{ color: 'var(--color-gold-light)' }} width={17} height={17} /> Compétences & Technologies Maîtrisées
           </h3>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
+          <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
             Ces technologies sont utilisées pour calculer le matching avec les offres d'emploi et enrichir vos lettres de candidature.
           </p>
 
-          {/* Current Skills list */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem', minHeight: '40px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1.25rem', minHeight: '36px' }}>
             {profile.skills.map((skill) => (
               <SkillBadge
                 key={skill}
@@ -298,8 +305,7 @@ export const Profile = () => {
             ))}
           </div>
 
-          {/* Add custom skill input */}
-          <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem', maxWidth: '480px' }}>
+          <div style={{ display: 'flex', gap: '0.65rem', marginBottom: '1.25rem', maxWidth: '440px' }}>
             <input
               type="text"
               value={newSkill}
@@ -316,18 +322,17 @@ export const Profile = () => {
             <button
               type="button"
               onClick={() => handleAddSkill()}
-              className="btn btn-gold-outline"
+              className="btn btn-gold-outline btn-sm"
             >
-              <FiPlus /> Ajouter
+              <PlusIcon width={14} height={14} /> Ajouter
             </button>
           </div>
 
-          {/* Suggested skills */}
           <div>
-            <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.5rem' }}>
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.4rem' }}>
               Suggestions rapides :
             </span>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
               {PRESET_SKILLS.filter(s => !profile.skills.includes(s)).slice(0, 10).map((skill) => (
                 <button
                   key={skill}
@@ -343,10 +348,9 @@ export const Profile = () => {
           </div>
         </div>
 
-        {/* Submit */}
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
           <button type="submit" className="btn btn-primary btn-lg">
-            <FiCheckCircle /> Enregistrer toutes les modifications
+            <CheckCircledIcon width={16} height={16} /> Enregistrer toutes les modifications
           </button>
         </div>
       </form>

@@ -1,9 +1,9 @@
 import React from 'react';
-import { FiSearch, FiFolder, FiSend } from 'react-icons/fi';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Link } from 'react-router-dom';
 
 export const EmptyState = ({
-  icon: Icon = FiSearch,
+  icon: Icon = MagnifyingGlassIcon,
   title = "Aucun élément trouvé",
   description = "Essayez de modifier vos filtres ou effectuez une recherche différente.",
   actionText,
@@ -14,7 +14,7 @@ export const EmptyState = ({
     <div
       className="glass-panel"
       style={{
-        padding: '3.5rem 2rem',
+        padding: '3rem 2rem',
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
@@ -25,8 +25,8 @@ export const EmptyState = ({
     >
       <div
         style={{
-          width: '64px',
-          height: '64px',
+          width: '56px',
+          height: '56px',
           borderRadius: '50%',
           background: 'rgba(155, 120, 66, 0.1)',
           border: '1px solid var(--color-gold-border)',
@@ -34,17 +34,17 @@ export const EmptyState = ({
           alignItems: 'center',
           justifyContent: 'center',
           color: 'var(--color-gold-light)',
-          marginBottom: '1.25rem'
+          marginBottom: '1rem'
         }}
       >
-        <Icon size={28} />
+        <Icon width={24} height={24} />
       </div>
 
-      <h3 style={{ fontSize: '1.25rem', marginBottom: '0.4rem', color: '#FFF' }}>
+      <h3 style={{ fontSize: '1.2rem', marginBottom: '0.35rem', color: '#FFF' }}>
         {title}
       </h3>
 
-      <p style={{ color: 'var(--text-muted)', maxWidth: '420px', fontSize: '0.9rem', marginBottom: actionText ? '1.5rem' : 0 }}>
+      <p style={{ color: 'var(--text-muted)', maxWidth: '420px', fontSize: '0.88rem', marginBottom: actionText ? '1.25rem' : 0 }}>
         {description}
       </p>
 

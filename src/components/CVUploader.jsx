@@ -1,5 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { FiUploadCloud, FiFileText, FiCheckCircle, FiDownload, FiTrash2, FiRefreshCw, FiAlertCircle } from 'react-icons/fi';
+import {
+  UploadIcon,
+  FileTextIcon,
+  CheckCircledIcon,
+  DownloadIcon,
+  TrashIcon,
+  ReloadIcon,
+  ExclamationTriangleIcon
+} from '@radix-ui/react-icons';
 import { validateCVFile } from '../utils/validators';
 import { formatDate } from '../utils/formatDate';
 import { useToast } from '../context/ToastContext';
@@ -26,7 +34,7 @@ export const CVUploader = ({ cvData, onSaveCV, onDeleteCV }) => {
         fileSize: file.size,
         uploadDate: new Date().toISOString(),
         status: "Ready for applications",
-        dataUrl: e.target.result // Base64 data URL
+        dataUrl: e.target.result
       };
       onSaveCV(newCv);
       showSuccess(`CV "${file.name}" importé avec succès !`);
@@ -60,7 +68,6 @@ export const CVUploader = ({ cvData, onSaveCV, onDeleteCV }) => {
       link.download = cvData.fileName || 'CV_Abdelaziz_Aabbour.pdf';
       link.click();
     } else {
-      // Mock download dummy blob if seed data without actual PDF
       const blob = new Blob(["DevApply Demo CV - Abdelaziz Aabbour\nFull Stack Web Developer"], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
@@ -82,14 +89,14 @@ export const CVUploader = ({ cvData, onSaveCV, onDeleteCV }) => {
     <div style={{ width: '100%' }}>
       {cvData ? (
         /* CV Active Display */
-        <div className="glass-card gold-border" style={{ padding: '1.75rem' }}>
+        <div className="glass-card gold-border" style={{ padding: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <div
                 style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '14px',
+                  width: '50px',
+                  height: '50px',
+                  borderRadius: '12px',
                   background: 'rgba(155, 120, 66, 0.15)',
                   border: '1px solid var(--color-gold-border)',
                   display: 'flex',
@@ -99,18 +106,18 @@ export const CVUploader = ({ cvData, onSaveCV, onDeleteCV }) => {
                   flexShrink: 0
                 }}
               >
-                <FiFileText size={28} />
+                <FileTextIcon width={24} height={24} />
               </div>
               <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
-                  <h4 style={{ fontSize: '1.15rem', color: '#FFF' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <h4 style={{ fontSize: '1.05rem', color: '#FFF' }}>
                     {cvData.fileName || 'CV_Abdelaziz_Aabbour.pdf'}
                   </h4>
                   <span className="badge badge-verified">
-                    <FiCheckCircle size={11} /> {cvData.status || 'Ready for applications'}
+                    <CheckCircledIcon width={11} height={11} /> {cvData.status || 'Ready for applications'}
                   </span>
                 </div>
-                <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.35rem', display: 'flex', gap: '1rem' }}>
+                <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.25rem', display: 'flex', gap: '0.75rem' }}>
                   <span>Taille : {formatFileSize(cvData.fileSize)}</span>
                   <span>•</span>
                   <span>Mis à jour le : {formatDate(cvData.uploadDate)}</span>
@@ -118,14 +125,14 @@ export const CVUploader = ({ cvData, onSaveCV, onDeleteCV }) => {
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <button
                 type="button"
                 onClick={handleDownload}
                 className="btn btn-secondary btn-sm"
                 title="Télécharger une copie de mon CV"
               >
-                <FiDownload /> Télécharger
+                <DownloadIcon width={13} height={13} /> Télécharger
               </button>
               <button
                 type="button"
@@ -133,7 +140,7 @@ export const CVUploader = ({ cvData, onSaveCV, onDeleteCV }) => {
                 className="btn btn-gold-outline btn-sm"
                 title="Remplacer par un nouveau fichier PDF"
               >
-                <FiRefreshCw /> Remplacer
+                <ReloadIcon width={13} height={13} /> Remplacer
               </button>
               <button
                 type="button"
@@ -141,7 +148,7 @@ export const CVUploader = ({ cvData, onSaveCV, onDeleteCV }) => {
                 className="btn btn-danger btn-sm"
                 title="Supprimer mon CV"
               >
-                <FiTrash2 /> Supprimer
+                <TrashIcon width={13} height={13} /> Supprimer
               </button>
             </div>
           </div>
@@ -157,17 +164,17 @@ export const CVUploader = ({ cvData, onSaveCV, onDeleteCV }) => {
           style={{
             border: `2px dashed ${dragActive ? 'var(--color-gold)' : 'var(--border-subtle)'}`,
             borderRadius: 'var(--radius-lg)',
-            padding: '3rem 2rem',
+            padding: '2.5rem 1.5rem',
             textAlign: 'center',
             cursor: 'pointer',
-            background: dragActive ? 'rgba(155, 120, 66, 0.08)' : 'rgba(21, 21, 21, 0.6)',
+            background: dragActive ? 'rgba(155, 120, 66, 0.08)' : 'var(--bg-surface)',
             transition: 'all var(--transition-normal)'
           }}
         >
           <div
             style={{
-              width: '64px',
-              height: '64px',
+              width: '56px',
+              height: '56px',
               borderRadius: '50%',
               background: 'rgba(155, 120, 66, 0.12)',
               border: '1px solid var(--color-gold-border)',
@@ -175,38 +182,38 @@ export const CVUploader = ({ cvData, onSaveCV, onDeleteCV }) => {
               alignItems: 'center',
               justifyContent: 'center',
               color: 'var(--color-gold-light)',
-              margin: '0 auto 1.25rem'
+              margin: '0 auto 1rem'
             }}
           >
-            <FiUploadCloud size={32} />
+            <UploadIcon width={26} height={26} />
           </div>
 
-          <h3 style={{ fontSize: '1.2rem', color: '#FFF', marginBottom: '0.5rem' }}>
+          <h3 style={{ fontSize: '1.1rem', color: '#FFF', marginBottom: '0.4rem' }}>
             Importer votre CV (Format PDF)
           </h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', maxWidth: '420px', margin: '0 auto 1.25rem' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', maxWidth: '420px', margin: '0 auto 1rem' }}>
             Glissez-déposez votre CV ici ou cliquez pour parcourir vos fichiers.
           </p>
 
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '1rem', fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-            <span>✓ Format accepté : <strong>PDF uniquement</strong></span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.76rem', color: 'var(--text-secondary)' }}>
+            <span>✓ Format : <strong>PDF</strong></span>
             <span>•</span>
             <span>✓ Taille max : <strong>5 Mo</strong></span>
             <span>•</span>
-            <span>🔒 Stockage sécurisé et privé</span>
+            <span>🔒 Privé & sécurisé</span>
           </div>
 
           {errorMsg && (
             <div style={{
-              marginTop: '1.25rem',
+              marginTop: '1rem',
               color: '#F87171',
-              fontSize: '0.85rem',
+              fontSize: '0.82rem',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '0.4rem'
+              gap: '0.35rem'
             }}>
-              <FiAlertCircle /> {errorMsg}
+              <ExclamationTriangleIcon width={13} height={13} /> {errorMsg}
             </div>
           )}
         </div>

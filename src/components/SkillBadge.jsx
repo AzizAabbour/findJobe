@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiX } from 'react-icons/fi';
+import { Cross2Icon } from '@radix-ui/react-icons';
 
 export const SkillBadge = ({ skill, onRemove, clickable, active, onClick, size = 'md' }) => {
   const isRemovable = typeof onRemove === 'function';
@@ -11,9 +11,9 @@ export const SkillBadge = ({ skill, onRemove, clickable, active, onClick, size =
         display: 'inline-flex',
         alignItems: 'center',
         gap: '0.35rem',
-        padding: size === 'sm' ? '0.2rem 0.55rem' : '0.35rem 0.85rem',
+        padding: size === 'sm' ? '0.18rem 0.5rem' : '0.3rem 0.75rem',
         borderRadius: 'var(--radius-full)',
-        fontSize: size === 'sm' ? '0.75rem' : '0.82rem',
+        fontSize: size === 'sm' ? '0.74rem' : '0.8rem',
         fontWeight: 600,
         background: active
           ? 'linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold) 100%)'
@@ -41,13 +41,13 @@ export const SkillBadge = ({ skill, onRemove, clickable, active, onClick, size =
             justifyContent: 'center',
             color: active ? '#0B0B0B' : 'var(--text-muted)',
             cursor: 'pointer',
-            padding: '2px',
+            padding: '1px',
             marginLeft: '2px',
             borderRadius: '50%'
           }}
           aria-label={`Supprimer ${skill}`}
         >
-          <FiX size={12} />
+          <Cross2Icon width={11} height={11} />
         </button>
       )}
     </span>

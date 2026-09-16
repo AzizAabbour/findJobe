@@ -1,6 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiMapPin, FiGlobe, FiLinkedin, FiMail, FiBookmark, FiExternalLink, FiUsers, FiLayers } from 'react-icons/fi';
+import {
+  GlobeIcon,
+  LinkedInLogoIcon,
+  EnvelopeClosedIcon,
+  BookmarkIcon,
+  BookmarkFilledIcon,
+  ExternalLinkIcon,
+  PersonIcon,
+  LayersIcon
+} from '@radix-ui/react-icons';
 import { SkillBadge } from './SkillBadge';
 import { VerificationBadge } from './VerificationBadge';
 
@@ -27,24 +36,24 @@ export const CompanyCard = ({ company, isSaved, onToggleSave }) => {
   } = company;
 
   return (
-    <div className="glass-card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
+    <div className="glass-card" style={{ padding: '1.35rem', display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* Top row: Logo, Name, Category & Bookmark */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '1rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '0.85rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <div
             style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
+              width: '42px',
+              height: '42px',
+              borderRadius: '10px',
               background: `linear-gradient(135deg, ${logoColor} 0%, #151515 150%)`,
               border: `1px solid ${logoColor}55`,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 800,
-              fontSize: '1rem',
+              fontSize: '0.95rem',
               color: '#FFFFFF',
-              boxShadow: `0 4px 14px ${logoColor}33`,
+              boxShadow: `0 3px 10px ${logoColor}33`,
               flexShrink: 0
             }}
           >
@@ -54,7 +63,7 @@ export const CompanyCard = ({ company, isSaved, onToggleSave }) => {
             <Link
               to={`/companies/${id}`}
               style={{
-                fontSize: '1.1rem',
+                fontSize: '1.05rem',
                 fontWeight: 700,
                 color: '#FFFFFF',
                 display: 'block',
@@ -63,12 +72,12 @@ export const CompanyCard = ({ company, isSaved, onToggleSave }) => {
             >
               {name}
             </Link>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.2rem', flexWrap: 'wrap' }}>
-              <span className="badge badge-gray" style={{ fontSize: '0.7rem' }}>
-                <FiLayers size={10} /> {category}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginTop: '0.2rem', flexWrap: 'wrap' }}>
+              <span className="badge badge-gray" style={{ fontSize: '0.68rem' }}>
+                <LayersIcon width={10} height={10} /> {category}
               </span>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
-                <FiMapPin size={11} /> {city}
+              <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                {city}
               </span>
             </div>
           </div>
@@ -79,22 +88,22 @@ export const CompanyCard = ({ company, isSaved, onToggleSave }) => {
             onClick={() => onToggleSave(id)}
             className="btn btn-secondary btn-icon"
             style={{
-              width: '32px',
-              height: '32px',
+              width: '30px',
+              height: '30px',
               color: isSaved ? 'var(--color-gold-light)' : 'var(--text-muted)'
             }}
             title={isSaved ? "Retirer des favoris" : "Sauvegarder l'entreprise"}
           >
-            <FiBookmark fill={isSaved ? 'currentColor' : 'none'} size={15} />
+            {isSaved ? <BookmarkFilledIcon width={14} height={14} /> : <BookmarkIcon width={14} height={14} />}
           </button>
         )}
       </div>
 
       {/* Tagline / Short description */}
       <p style={{
-        fontSize: '0.86rem',
+        fontSize: '0.84rem',
         color: 'var(--text-secondary)',
-        marginBottom: '1rem',
+        marginBottom: '0.85rem',
         lineHeight: 1.45,
         flex: 1,
         display: '-webkit-box',
@@ -106,9 +115,9 @@ export const CompanyCard = ({ company, isSaved, onToggleSave }) => {
       </p>
 
       {/* Meta chips: size & open positions */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.9rem', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
-          <FiUsers size={13} /> {companySize} emp.
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.85rem', fontSize: '0.76rem', color: 'var(--text-muted)' }}>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+          <PersonIcon width={12} height={12} /> {companySize} emp.
         </span>
         <span>•</span>
         <span style={{
@@ -122,12 +131,12 @@ export const CompanyCard = ({ company, isSaved, onToggleSave }) => {
       </div>
 
       {/* Technologies stack tags */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1.1rem' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1rem' }}>
         {technologies.slice(0, 4).map((tech) => (
           <SkillBadge key={tech} skill={tech} size="sm" />
         ))}
         {technologies.length > 4 && (
-          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', alignSelf: 'center', marginLeft: '0.2rem' }}>
+          <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', alignSelf: 'center', marginLeft: '0.2rem' }}>
             +{technologies.length - 4}
           </span>
         )}
@@ -135,7 +144,7 @@ export const CompanyCard = ({ company, isSaved, onToggleSave }) => {
 
       {/* Footer: Verification & Action links */}
       <div style={{
-        paddingTop: '0.85rem',
+        paddingTop: '0.75rem',
         borderTop: '1px solid var(--border-subtle)',
         display: 'flex',
         alignItems: 'center',
@@ -146,17 +155,17 @@ export const CompanyCard = ({ company, isSaved, onToggleSave }) => {
       }}>
         <VerificationBadge verifiedAt={verifiedAt} sourceUrl={sourceUrl} isDemo={isDemo} />
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
           {website && (
             <a
               href={website}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary btn-icon"
-              style={{ width: '30px', height: '30px' }}
+              style={{ width: '28px', height: '28px' }}
               title="Site Web Officiel"
             >
-              <FiGlobe size={13} />
+              <GlobeIcon width={12} height={12} />
             </a>
           )}
           {linkedin && (
@@ -165,14 +174,14 @@ export const CompanyCard = ({ company, isSaved, onToggleSave }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary btn-icon"
-              style={{ width: '30px', height: '30px' }}
+              style={{ width: '28px', height: '28px' }}
               title="Page LinkedIn"
             >
-              <FiLinkedin size={13} />
+              <LinkedInLogoIcon width={12} height={12} />
             </a>
           )}
-          <Link to={`/companies/${id}`} className="btn btn-gold-outline btn-sm">
-            Détails <FiExternalLink size={12} />
+          <Link to={`/companies/${id}`} className="btn btn-gold-outline btn-sm" style={{ padding: '0.25rem 0.6rem', fontSize: '0.76rem' }}>
+            Détails <ExternalLinkIcon width={11} height={11} />
           </Link>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { FiBriefcase, FiSend, FiBookmark, FiPlus } from 'react-icons/fi';
+import { BackpackIcon, PlusIcon } from '@radix-ui/react-icons';
 import { Link } from 'react-router-dom';
 import { jobService } from '../services/jobService';
 import { JobCard } from '../components/JobCard';
@@ -18,7 +18,6 @@ export const Jobs = () => {
 
   const filteredJobs = useMemo(() => {
     return jobs.filter((job) => {
-      // Search query (title, companyName, city, technologies, description)
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matchesTitle = job.title.toLowerCase().includes(q);
@@ -31,12 +30,10 @@ export const Jobs = () => {
         }
       }
 
-      // City filter
       if (selectedCity && job.city.toLowerCase() !== selectedCity.toLowerCase()) {
         return false;
       }
 
-      // Job Type filter
       if (selectedType && selectedType !== 'Tous les types') {
         const typeNormalized = selectedType.toLowerCase();
         const jobTypeNormalized = job.jobType.toLowerCase();
@@ -45,14 +42,12 @@ export const Jobs = () => {
         }
       }
 
-      // Location Mode filter (Remote, Hybrid, On-site)
       if (selectedLocation && selectedLocation !== 'Tous les modes') {
         if ((job.locationType || '').toLowerCase() !== selectedLocation.toLowerCase()) {
           return false;
         }
       }
 
-      // Tech filter
       if (selectedTech) {
         const hasTech = (job.technologies || []).some(
           t => t.toLowerCase() === selectedTech.toLowerCase()
@@ -82,7 +77,7 @@ export const Jobs = () => {
       {/* Header */}
       <div className="page-header">
         <div>
-          <span className="badge badge-gold" style={{ marginBottom: '0.4rem' }}>
+          <span className="badge badge-gold" style={{ marginBottom: '0.35rem' }}>
             Offres d'Emploi & Stages
           </span>
           <h1 className="page-title">Opportunités Web & Full Stack au Maroc</h1>
@@ -92,7 +87,7 @@ export const Jobs = () => {
         </div>
 
         <Link to="/admin" className="btn btn-secondary btn-sm">
-          <FiPlus /> Ajouter une offre vérifiée
+          <PlusIcon width={13} height={13} /> Ajouter une offre vérifiée
         </Link>
       </div>
 
@@ -121,7 +116,7 @@ export const Jobs = () => {
       {/* Job Cards Grid */}
       {filteredJobs.length === 0 ? (
         <EmptyState
-          icon={FiBriefcase}
+          icon={BackpackIcon}
           title="Aucune offre ne correspond à vos critères"
           description="Modifiez vos mots-clés ou réinitialisez les filtres pour découvrir toutes les opportunités disponibles."
           actionText="Réinitialiser les filtres"

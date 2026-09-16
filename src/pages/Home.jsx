@@ -2,18 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  FiSend,
-  FiFileText,
-  FiCheckCircle,
-  FiBriefcase,
-  FiLayers,
-  FiShield,
-  FiClock,
-  FiTrendingUp,
-  FiAward,
-  FiTerminal,
-  FiCode
-} from 'react-icons/fi';
+  PaperPlaneIcon,
+  FileTextIcon,
+  CheckCircledIcon,
+  BackpackIcon,
+  LayersIcon,
+  LockClosedIcon,
+  RocketIcon,
+  StarIcon
+} from '@radix-ui/react-icons';
 import { companyService } from '../services/companyService';
 import { jobService } from '../services/jobService';
 import { applicationService } from '../services/applicationService';
@@ -27,52 +24,39 @@ export const Home = () => {
   const featuredJobs = jobs.slice(0, 3);
 
   return (
-    <div>
+    <div className="page-container">
       {/* Hero Section */}
       <section style={{
         position: 'relative',
-        padding: '3rem 0 4rem',
+        padding: '2.5rem 0 3.5rem',
         overflow: 'hidden'
       }}>
-        {/* Decorative background glow */}
-        <div style={{
-          position: 'absolute',
-          top: '-10%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '750px',
-          height: '400px',
-          background: 'radial-gradient(circle, rgba(155, 120, 66, 0.18) 0%, rgba(11, 11, 11, 0) 70%)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }} />
-
-        <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: '900px', margin: '0 auto' }}>
+        <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', maxWidth: '880px', margin: '0 auto' }}>
           {/* OFPPT / Bac+2 Target Badge */}
           <motion.div
-            initial={{ opacity: 0, y: -15 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
             style={{ display: 'inline-flex', marginBottom: '1.25rem' }}
           >
             <span
               className="badge badge-gold"
-              style={{ padding: '0.4rem 1rem', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+              style={{ padding: '0.35rem 0.9rem', fontSize: '0.78rem', display: 'flex', alignItems: 'center', gap: '0.45rem' }}
             >
-              <FiAward size={14} /> Plateforme Dédiée aux Développeurs Web Full Stack & Lauréats Bac+2 au Maroc
+              <StarIcon width={13} height={13} /> Plateforme Dédiée aux Développeurs Web Full Stack & Lauréats Bac+2 au Maroc
             </span>
           </motion.div>
 
           {/* Hero Title */}
           <motion.h1
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             style={{
-              fontSize: 'clamp(2.1rem, 5vw, 3.4rem)',
+              fontSize: 'clamp(2rem, 4.5vw, 3.2rem)',
               fontWeight: 800,
               lineHeight: 1.15,
-              marginBottom: '1.25rem',
+              marginBottom: '1.2rem',
               letterSpacing: '-0.03em'
             }}
           >
@@ -81,15 +65,15 @@ export const Home = () => {
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             style={{
-              fontSize: '1.1rem',
+              fontSize: '1.05rem',
               color: 'var(--text-secondary)',
               lineHeight: 1.6,
-              maxWidth: '740px',
-              margin: '0 auto 2.25rem'
+              maxWidth: '720px',
+              margin: '0 auto 2rem'
             }}
           >
             One profile. One CV. Multiple opportunities. Discover startups and technology companies looking for Web Developers and Full Stack Developers in Casablanca, Rabat, Marrakech, Tangier, and across Morocco.
@@ -97,80 +81,80 @@ export const Home = () => {
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', marginBottom: '3.5rem' }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.85rem', flexWrap: 'wrap', marginBottom: '3rem' }}
           >
             <Link to="/jobs" className="btn btn-primary btn-lg">
-              <FiBriefcase size={18} /> Explore Opportunities
+              <BackpackIcon width={16} height={16} /> Explore Opportunities
             </Link>
             <Link to="/cv-manager" className="btn btn-secondary btn-lg">
-              <FiFileText size={18} /> Upload My CV
+              <FileTextIcon width={16} height={16} /> Upload My CV
             </Link>
           </motion.div>
         </div>
 
         {/* Animated Developer Visual (Terminal & Code Window) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          style={{ maxWidth: '820px', margin: '0 auto', position: 'relative', zIndex: 1 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 1 }}
         >
-          <div className="glass-card gold-border animate-gold-pulse" style={{ padding: '0', overflow: 'hidden' }}>
+          <div className="glass-card gold-border" style={{ padding: '0', overflow: 'hidden' }}>
             {/* Terminal Top bar */}
             <div style={{
               background: '#151515',
-              padding: '0.75rem 1.25rem',
+              padding: '0.65rem 1.15rem',
               borderBottom: '1px solid var(--border-subtle)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between'
             }}>
               <div style={{ display: 'flex', gap: '6px' }}>
-                <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#EF4444' }} />
-                <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#F59E0B' }} />
-                <span style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#10B981' }} />
+                <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#EF4444' }} />
+                <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#F59E0B' }} />
+                <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10B981' }} />
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+              <div style={{ fontSize: '0.74rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
                 devapply-morocco ~ stack: [React, Laravel, MySQL, Docker]
               </div>
-              <div style={{ width: '40px' }} />
+              <div style={{ width: '36px' }} />
             </div>
 
             {/* Terminal Body */}
             <div style={{
-              padding: '1.5rem',
+              padding: '1.25rem',
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.85rem',
-              lineHeight: 1.7,
+              fontSize: '0.82rem',
+              lineHeight: 1.65,
               background: '#0D0D0D',
               color: 'var(--text-secondary)'
             }}>
               <div>
                 <span style={{ color: 'var(--color-gold-light)' }}>const</span> candidate = &#123;
               </div>
-              <div style={{ paddingLeft: '1.5rem' }}>
+              <div style={{ paddingLeft: '1.25rem' }}>
                 name: <span style={{ color: '#34D399' }}>"Abdelaziz Aabbour"</span>,
               </div>
-              <div style={{ paddingLeft: '1.5rem' }}>
+              <div style={{ paddingLeft: '1.25rem' }}>
                 diploma: <span style={{ color: '#34D399' }}>"Bac+2 Développeur Web Full Stack (OFPPT)"</span>,
               </div>
-              <div style={{ paddingLeft: '1.5rem' }}>
+              <div style={{ paddingLeft: '1.25rem' }}>
                 frontend: [<span style={{ color: '#60A5FA' }}>"React.js"</span>, <span style={{ color: '#60A5FA' }}>"JavaScript ES6"</span>, <span style={{ color: '#60A5FA' }}>"HTML5/CSS3"</span>],
               </div>
-              <div style={{ paddingLeft: '1.5rem' }}>
+              <div style={{ paddingLeft: '1.25rem' }}>
                 backend: [<span style={{ color: '#F87171' }}>"Laravel"</span>, <span style={{ color: '#F87171' }}>"PHP"</span>, <span style={{ color: '#F87171' }}>"Node.js"</span>, <span style={{ color: '#F87171' }}>"MySQL"</span>],
               </div>
-              <div style={{ paddingLeft: '1.5rem' }}>
+              <div style={{ paddingLeft: '1.25rem' }}>
                 targetLocation: <span style={{ color: '#FBBF24' }}>"Casablanca, Rabat & Remote Morocco"</span>,
               </div>
-              <div style={{ paddingLeft: '1.5rem' }}>
+              <div style={{ paddingLeft: '1.25rem' }}>
                 status: <span style={{ color: '#10B981' }}>"Ready to join innovative startups & tech agencies"</span>
               </div>
               <div>&#125;;</div>
-              <div style={{ marginTop: '0.75rem', color: 'var(--color-gold-light)' }}>
+              <div style={{ marginTop: '0.65rem', color: 'var(--color-gold-light)' }}>
                 &gt; DevApply.matchOpportunities(candidate) =&gt; <span style={{ color: '#34D399' }}>{jobs.length} opportunités vérifiées trouvées ✓</span>
               </div>
             </div>
@@ -179,56 +163,56 @@ export const Home = () => {
       </section>
 
       {/* Real Statistics Section */}
-      <section style={{ padding: '2rem 0 3.5rem' }}>
+      <section style={{ padding: '1rem 0 3rem' }}>
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '1.25rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+          gap: '1rem'
         }}>
-          <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ color: 'var(--color-gold-light)', marginBottom: '0.5rem', display: 'inline-block' }}>
-              <FiLayers size={24} />
+          <div className="glass-card" style={{ padding: '1.25rem', textAlign: 'center' }}>
+            <div style={{ color: 'var(--color-gold-light)', marginBottom: '0.4rem', display: 'inline-block' }}>
+              <LayersIcon width={22} height={22} />
             </div>
-            <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#FFF' }}>
+            <div style={{ fontSize: '2.2rem', fontWeight: 800, color: '#FFF' }}>
               {companies.length}
             </div>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
               Entreprises & Startups Répertoriées
             </div>
           </div>
 
-          <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ color: '#60A5FA', marginBottom: '0.5rem', display: 'inline-block' }}>
-              <FiBriefcase size={24} />
+          <div className="glass-card" style={{ padding: '1.25rem', textAlign: 'center' }}>
+            <div style={{ color: '#60A5FA', marginBottom: '0.4rem', display: 'inline-block' }}>
+              <BackpackIcon width={22} height={22} />
             </div>
-            <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#FFF' }}>
+            <div style={{ fontSize: '2.2rem', fontWeight: 800, color: '#FFF' }}>
               {jobs.length}
             </div>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
               Opportunités & Stages Ouverts
             </div>
           </div>
 
-          <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ color: '#A78BFA', marginBottom: '0.5rem', display: 'inline-block' }}>
-              <FiSend size={24} />
+          <div className="glass-card" style={{ padding: '1.25rem', textAlign: 'center' }}>
+            <div style={{ color: '#A78BFA', marginBottom: '0.4rem', display: 'inline-block' }}>
+              <PaperPlaneIcon width={22} height={22} />
             </div>
-            <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#FFF' }}>
+            <div style={{ fontSize: '2.2rem', fontWeight: 800, color: '#FFF' }}>
               {stats.sent}
             </div>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
               Candidatures Envoyées
             </div>
           </div>
 
-          <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
-            <div style={{ color: '#34D399', marginBottom: '0.5rem', display: 'inline-block' }}>
-              <FiTrendingUp size={24} />
+          <div className="glass-card" style={{ padding: '1.25rem', textAlign: 'center' }}>
+            <div style={{ color: '#34D399', marginBottom: '0.4rem', display: 'inline-block' }}>
+              <RocketIcon width={22} height={22} />
             </div>
-            <div style={{ fontSize: '2.4rem', fontWeight: 800, color: '#FFF' }}>
+            <div style={{ fontSize: '2.2rem', fontWeight: 800, color: '#FFF' }}>
               {stats.pending + stats.interview}
             </div>
-            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+            <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
               Candidatures en Cours / Entretiens
             </div>
           </div>
@@ -236,11 +220,11 @@ export const Home = () => {
       </section>
 
       {/* Featured Opportunities Preview */}
-      <section style={{ padding: '1rem 0 3.5rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <section style={{ padding: '1rem 0 3rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
           <div>
-            <span className="badge badge-gold" style={{ marginBottom: '0.4rem' }}>Sélection Récente</span>
-            <h2 style={{ fontSize: '1.6rem', color: '#FFF' }}>Dernières Opportunités Développeur Web</h2>
+            <span className="badge badge-gold" style={{ marginBottom: '0.35rem' }}>Sélection Récente</span>
+            <h2 style={{ fontSize: '1.45rem', color: '#FFF' }}>Dernières Opportunités Développeur Web</h2>
           </div>
           <Link to="/jobs" className="btn btn-gold-outline btn-sm">
             Voir toutes les offres ({jobs.length}) →
@@ -255,82 +239,82 @@ export const Home = () => {
       </section>
 
       {/* Features Showcase */}
-      <section style={{ padding: '2rem 0 4rem' }}>
-        <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 2.5rem' }}>
-          <span className="badge badge-gold" style={{ marginBottom: '0.4rem' }}>Fonctionnalités Clés</span>
-          <h2 style={{ fontSize: '1.8rem', color: '#FFF' }}>Un Pipeline de Recrutement Structuré</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.35rem' }}>
+      <section style={{ padding: '1.5rem 0 3rem' }}>
+        <div style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 2rem' }}>
+          <span className="badge badge-gold" style={{ marginBottom: '0.35rem' }}>Fonctionnalités Clés</span>
+          <h2 style={{ fontSize: '1.6rem', color: '#FFF' }}>Un Pipeline de Recrutement Structuré</h2>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', marginTop: '0.3rem' }}>
             Pensé pour éliminer les candidatures non ciblées et maximiser vos réponses positives d'entretiens.
           </p>
         </div>
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1.5rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: '1.25rem'
         }}>
-          <div className="glass-card" style={{ padding: '1.75rem' }}>
+          <div className="glass-card" style={{ padding: '1.5rem' }}>
             <div style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
+              width: '42px',
+              height: '42px',
+              borderRadius: '10px',
               background: 'rgba(155, 120, 66, 0.15)',
               color: 'var(--color-gold-light)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginBottom: '1rem'
+              marginBottom: '0.85rem'
             }}>
-              <FiSend size={22} />
+              <PaperPlaneIcon width={20} height={20} />
             </div>
-            <h3 style={{ fontSize: '1.15rem', color: '#FFF', marginBottom: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.05rem', color: '#FFF', marginBottom: '0.4rem' }}>
               Assistant de Candidature
             </h3>
-            <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               Générez en un clic des lettres et emails de motivation ultra-personnalisés en français, adaptés aux exigences techniques de chaque startup marocaine.
             </p>
           </div>
 
-          <div className="glass-card" style={{ padding: '1.75rem' }}>
+          <div className="glass-card" style={{ padding: '1.5rem' }}>
             <div style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
+              width: '42px',
+              height: '42px',
+              borderRadius: '10px',
               background: 'rgba(96, 165, 250, 0.15)',
               color: '#60A5FA',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginBottom: '1rem'
+              marginBottom: '0.85rem'
             }}>
-              <FiCheckCircle size={22} />
+              <CheckCircledIcon width={20} height={20} />
             </div>
-            <h3 style={{ fontSize: '1.15rem', color: '#FFF', marginBottom: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.05rem', color: '#FFF', marginBottom: '0.4rem' }}>
               Tableau Kanban de Suivi
             </h3>
-            <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               Visualisez le cycle complet de vos démarches : Nouveau, Prêt, Envoyé, Relance à faire, Entretien, Refusé et Accepté avec alertes automatiques.
             </p>
           </div>
 
-          <div className="glass-card" style={{ padding: '1.75rem' }}>
+          <div className="glass-card" style={{ padding: '1.5rem' }}>
             <div style={{
-              width: '46px',
-              height: '46px',
-              borderRadius: '12px',
+              width: '42px',
+              height: '42px',
+              borderRadius: '10px',
               background: 'rgba(52, 211, 153, 0.15)',
               color: '#34D399',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              marginBottom: '1rem'
+              marginBottom: '0.85rem'
             }}>
-              <FiShield size={22} />
+              <LockClosedIcon width={20} height={20} />
             </div>
-            <h3 style={{ fontSize: '1.15rem', color: '#FFF', marginBottom: '0.5rem' }}>
+            <h3 style={{ fontSize: '1.05rem', color: '#FFF', marginBottom: '0.4rem' }}>
               Éthique & Zéro Spam
             </h3>
-            <p style={{ fontSize: '0.86rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               Aucun scraping non autorisé ni robot spammeur. Seules les adresses officielles publiques et formulaires autorisés sont exploités, avec confirmation obligatoire.
             </p>
           </div>

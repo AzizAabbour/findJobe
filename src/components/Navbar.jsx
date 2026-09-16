@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiSearch, FiMenu, FiX, FiFileText, FiSend, FiUser, FiBell } from 'react-icons/fi';
+import {
+  MagnifyingGlassIcon,
+  HamburgerMenuIcon,
+  Cross2Icon,
+  PaperPlaneIcon,
+  FileTextIcon
+} from '@radix-ui/react-icons';
 import { profileService } from '../services/profileService';
 
 export const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
@@ -21,42 +27,39 @@ export const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
       top: 0,
       zIndex: 40,
       height: 'var(--navbar-height)',
-      background: 'rgba(11, 11, 11, 0.85)',
-      backdropFilter: 'blur(16px)',
-      WebkitBackdropFilter: 'blur(16px)',
+      background: '#0E0E0E',
       borderBottom: '1px solid var(--border-subtle)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: '0 2rem'
+      padding: '0 1.75rem'
     }}>
       {/* Left side: Hamburger & Title */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
         <button
           onClick={toggleSidebar}
           className="btn btn-secondary btn-icon"
-          style={{ display: 'flex' }}
           aria-label="Toggle navigation menu"
         >
-          {isSidebarOpen ? <FiX size={18} /> : <FiMenu size={18} />}
+          {isSidebarOpen ? <Cross2Icon width={17} height={17} /> : <HamburgerMenuIcon width={17} height={17} />}
         </button>
 
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
           <div style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '8px',
+            width: '28px',
+            height: '28px',
+            borderRadius: '7px',
             background: 'linear-gradient(135deg, var(--color-gold-light) 0%, var(--color-gold) 100%)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontWeight: 800,
-            fontSize: '1rem',
+            fontSize: '0.88rem',
             color: '#0B0B0B'
           }}>
             DA
           </div>
-          <span style={{ fontWeight: 800, fontSize: '1.15rem', letterSpacing: '-0.02em', color: '#FFF' }}>
+          <span style={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em', color: '#FFF' }}>
             DevApply <span style={{ color: 'var(--color-gold-light)' }}>MA</span>
           </span>
         </Link>
@@ -72,7 +75,11 @@ export const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
           position: 'relative'
         }}
       >
-        <FiSearch style={{ position: 'absolute', left: '1rem', color: 'var(--text-muted)' }} />
+        <MagnifyingGlassIcon
+          width={16}
+          height={16}
+          style={{ position: 'absolute', left: '0.85rem', color: 'var(--text-muted)' }}
+        />
         <input
           type="text"
           placeholder="Rechercher startup, techno (React, Laravel), ville..."
@@ -80,25 +87,24 @@ export const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{
             width: '100%',
-            paddingLeft: '2.5rem',
+            paddingLeft: '2.4rem',
             paddingRight: '1rem',
-            height: '38px',
+            height: '36px',
             borderRadius: 'var(--radius-full)',
             background: 'rgba(255, 255, 255, 0.04)',
             border: '1px solid var(--border-subtle)',
-            fontSize: '0.85rem'
+            fontSize: '0.84rem'
           }}
         />
       </form>
 
       {/* Right: Quick actions & profile */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
         <Link
           to="/assistant"
           className="btn btn-gold-outline btn-sm"
-          style={{ display: 'none', md: 'inline-flex' }}
         >
-          <FiSend /> Assistant IA
+          <PaperPlaneIcon width={13} height={13} /> Assistant IA
         </Link>
 
         <Link
@@ -106,7 +112,7 @@ export const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
           className="btn btn-secondary btn-sm"
           title="Mon CV"
         >
-          <FiFileText /> CV
+          <FileTextIcon width={13} height={13} /> CV
         </Link>
 
         <Link
@@ -114,8 +120,8 @@ export const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '0.6rem',
-            padding: '0.35rem 0.75rem 0.35rem 0.45rem',
+            gap: '0.55rem',
+            padding: '0.3rem 0.65rem 0.3rem 0.35rem',
             borderRadius: 'var(--radius-full)',
             background: 'var(--bg-surface)',
             border: '1px solid var(--border-subtle)',
@@ -123,8 +129,8 @@ export const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
           }}
         >
           <div style={{
-            width: '28px',
-            height: '28px',
+            width: '26px',
+            height: '26px',
             borderRadius: '50%',
             background: 'var(--color-gold)',
             color: '#070707',
@@ -132,11 +138,11 @@ export const Navbar = ({ toggleSidebar, isSidebarOpen }) => {
             alignItems: 'center',
             justifyContent: 'center',
             fontWeight: 700,
-            fontSize: '0.8rem'
+            fontSize: '0.75rem'
           }}>
             {profile.fullName ? profile.fullName.charAt(0).toUpperCase() : 'A'}
           </div>
-          <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+          <span style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
             {profile.fullName ? profile.fullName.split(' ')[0] : 'Aziz'}
           </span>
         </Link>
